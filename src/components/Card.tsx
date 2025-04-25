@@ -62,9 +62,30 @@ const Card = ({
 
   // Calculate transform for card
   const getCardTransform = () => {
-    // Add more dramatic lift when card is active/hovered
-    const liftAmount = isActive ? position.y + 40 : position.y; // Increased from 20 to 40
-    return `translateY(calc(-50% - ${liftAmount}px)) rotate(${rotation}deg) rotateZ(${rotationZ}deg)`;
+    // Reduced lift when card is active/hovered for less extreme movement
+    const liftAmount = isActive ? position.y + 30 : position.y; // Reduced from 40 to 30
+    
+    // For active cards, ensure they're fully visible by adding additional translate for edge cards
+    let transform = `translateY(calc(-50% - ${liftAmount}px)) rotate(${rotation}deg) rotateZ(${rotationZ}deg)`;
+    
+    // Add specific handling for edge cards when active
+    if (isActive) {
+      const cardWidth = 220; // Same as in CSS
+      const viewportWidth = window.innerWidth;
+      
+      // Calculate if card is close to edge - using absolute position
+      const absPosition = cardRef.current?.getBoundingClientRect().left || position.x;
+      const leftEdge = absPosition < cardWidth/2;
+      const rightEdge = absPosition > viewportWidth - cardWidth*1.5;
+      
+      if (leftEdge) {
+        transform += ' translateX(30px)'; // Push right if too close to left edge
+      } else if (rightEdge) {
+        transform += ' translateX(-30px)'; // Push left if too close to right edge
+      }
+    }
+    
+    return transform;
   };
 
   return (

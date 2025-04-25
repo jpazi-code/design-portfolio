@@ -1,6 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home.tsx';
+import WorksPage from './pages/WorksPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 import LogosPage from './pages/LogosPage';
 import IllustrationsPage from './pages/IllustrationsPage';
 import PostersPage from './pages/PostersPage';
@@ -20,9 +23,9 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/works" element={<div className="placeholder-page"><h1>Works</h1></div>} />
-          <Route path="/about" element={<div className="placeholder-page"><h1>About</h1></div>} />
-          <Route path="/contact" element={<div className="placeholder-page"><h1>Contact</h1></div>} />
+          <Route path="/works" element={<WorksPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           
           {/* Gallery pages */}
           <Route path="/logos" element={<LogosPage />} />

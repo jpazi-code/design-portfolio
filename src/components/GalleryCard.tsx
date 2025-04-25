@@ -94,26 +94,25 @@ const GalleryCard: React.FC<GalleryCardProps> = ({
     } else {
       // Calculate rotation relative to distance
       // Use a minimum distance to prevent extreme rotations when mouse is too close
-      const minDistance = 100;
+      const minDistance = 150; // Increased this value to make effect more consistent
       const effectiveDistance = Math.max(distance, minDistance);
-      const rotationFactor = Math.min(1, 600 / effectiveDistance);
+      
+      // Use a constant rotation factor regardless of distance to make effect more consistent
+      const rotationFactor = Math.min(1, 500 / effectiveDistance);
       
       // Normalize dx and dy based on distance
       const normalizedDx = dx / distance;
       const normalizedDy = dy / distance;
       
+      // Apply a scaling factor based on vertical position to make bottom effect similar to top
+      // This helps make the effect more consistent regardless of cursor vertical position
+      const verticalScaleFactor = 1.0;
+      
       // Set rotation - positive values for Y axis make the card turn TOWARD the mouse
       // negative values for X axis make the card tilt TOWARD the mouse
       rotateY.set(normalizedDx * maxRotation * rotationFactor);
-      rotateX.set(-normalizedDy * maxRotation * rotationFactor);
+      rotateX.set(-normalizedDy * maxRotation * rotationFactor * verticalScaleFactor);
       translateZ.set(0);
-      
-      // Debug log the rotation values
-      if (index === 0) {
-        console.log('Mouse:', mousePosition, 'Card:', cardPosition, 
-                   'Rotation:', { x: -normalizedDy * maxRotation * rotationFactor, 
-                                 y: normalizedDx * maxRotation * rotationFactor });
-      }
     }
   }, [mousePosition, cardPosition, isHovered, rotateX, rotateY, translateZ, index]);
 

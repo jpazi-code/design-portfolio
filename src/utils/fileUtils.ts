@@ -135,3 +135,85 @@ export const getVideosFromPublicDirectory = async (directoryPath: string): Promi
     ];
   }
 }; 
+
+/**
+ * Gets YouTube video URLs from a text file in the public directory
+ * @param directoryPath Path to the directory (e.g., "/video-edits")
+ * @param fileName Name of the text file containing URLs (e.g., "video-edits-urls")
+ * @returns A Promise that resolves to an array of GalleryItem objects with YouTube embeds
+ */
+export const getYouTubeVideosFromTextFile = async (directoryPath: string, fileName: string): Promise<GalleryItem[]> => {
+  try {
+    // Get the full path to the text file
+    const filePath = `${directoryPath}/${fileName}`;
+    
+    // Fetch the text file from the public directory
+    const response = await fetch(filePath);
+    
+    if (!response.ok) {
+      console.error(`Failed to fetch ${filePath}: ${response.status} ${response.statusText}`);
+      return [];
+    }
+    
+    // Get the text content
+    const text = await response.text();
+    
+    // Split text into lines and filter out empty lines
+    const lines = text.split('\n').filter(line => line.trim() !== '');
+    
+    // Process each line as a YouTube URL
+    const videoItems = lines.map((line, index) => {
+      // Extract video info from the line
+      // Expected format: URL|title or just URL (title will be auto-generated)
+      const parts = line.split('|');
+      const videoUrl = parts[0].trim();
+      let videoTitle = parts[1]?.trim() || `Video ${index + 1}`;
+      
+      // Extract YouTube video ID
+      const videoId = extractYouTubeVideoId(videoUrl);
+      
+      // Generate thumbnail URL
+      const thumbnailUrl = videoId 
+        ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` 
+        : '/vite.svg';
+      
+      return {
+        id: index + 1,
+        title: videoTitle,
+        imageSrc: thumbnailUrl,
+        videoSrc: videoUrl,
+        isYouTube: true,
+        youtubeId: videoId
+      };
+    });
+    
+    console.log(`Loaded ${videoItems.length} YouTube videos from ${filePath}`);
+    return videoItems;
+  } catch (error) {
+    console.error(`Error loading YouTube videos from ${fileName}:`, error);
+    return [];
+  }
+};
+
+/**
+ * Extracts the video ID from a YouTube URL
+ * @param url YouTube URL
+ * @returns The video ID or null if not found
+ */
+function extractYouTubeVideoId(url: string): string | null {
+  // Regular expressions to match various YouTube URL formats
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/)([^&\?\/]+)/,
+    /youtube\.com\/watch\?.*v=([^&]+)/,
+    /youtube\.com\/shorts\/([^&\?\/]+)/
+  ];
+  
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match && match[1]) {
+      return match[1];
+    }
+  }
+  
+  return null;
+} 

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import GalleryCard from './GalleryCard';
 import ImageModal from './ImageModal';
+import PageHeader from './PageHeader';
 import '../styles/Gallery.css';
 
 export interface GalleryItem {
@@ -9,6 +9,8 @@ export interface GalleryItem {
   title: string;
   imageSrc: string;
   videoSrc?: string;
+  isYouTube?: boolean;
+  youtubeId?: string | null;
 }
 
 interface GalleryProps {
@@ -49,12 +51,7 @@ const Gallery: React.FC<GalleryProps> = ({ items, title, loading = false }) => {
 
   return (
     <div className="gallery-container">
-      <div className="gallery-header">
-        <div className="back-button">
-          <Link to="/">← Back to Works</Link>
-        </div>
-        <h1 className="gallery-title">{title}</h1>
-      </div>
+      <PageHeader title={title} showWorksLink={false} />
       
       {loading ? (
         <div className="gallery-loading">

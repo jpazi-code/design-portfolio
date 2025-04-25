@@ -1,0 +1,48 @@
+.page-header-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  position: relative;
+  text-align: center;
+}
+
+.page-header-links {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.back-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.back-link:hover {
+  color: #2196F3;
+}
+
+.page-header-title {
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.page-header-divider {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(to right, #2196F3, #E64A19);
+  border-radius: 2px;
+}
+
+.page-header-links.single-link {
+  justify-content: center;
+} 

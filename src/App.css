@@ -17,11 +17,13 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: visible;
 }
 
 .content {
   flex: 1;
   display: flex;
+  overflow: visible;
 }
 
 #root {
@@ -29,6 +31,7 @@ body {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  overflow: visible;
 }
 
 .logo {

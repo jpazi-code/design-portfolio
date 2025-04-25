@@ -5,6 +5,7 @@ import ImageModal from '../components/ImageModal';
 import { illustrationsGallery } from '../data/galleryData';
 import { getImagesFromPublicDirectory } from '../utils/fileUtils';
 import '../styles/FloatingIllustrations.css';
+import PageHeader from '../components/PageHeader';
 
 interface FloatingItem {
   id: number;
@@ -460,12 +461,7 @@ const IllustrationsPage: React.FC = () => {
 
   return (
     <div className="floating-illustrations-container">
-      <div className="gallery-header">
-        <div className="back-button">
-          <Link to="/">← Back to Works</Link>
-        </div>
-        <h1 className="gallery-title">Illustrations</h1>
-      </div>
+      <PageHeader title="Sticker Illustrations" showWorksLink={false} />
       
       <div className="illustrations-arena" ref={containerRef}>
         {loading ? (

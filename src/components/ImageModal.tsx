@@ -45,9 +45,6 @@ const ImageModal: React.FC<ImageModalProps> = ({
           >
             <button className="modal-close" onClick={onClose}>×</button>
             
-            {/* Never show title for videos, and optionally for images based on config */}
-            {!videoSrc && <h3 className="modal-title">{title}</h3>}
-            
             {videoSrc ? (
               <video 
                 className="modal-video" 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import CategoryPage from './CategoryPage';
 import { videoEditsGallery } from '../data/galleryData';
-import { getVideosFromPublicDirectory } from '../utils/fileUtils';
+import { getVideosFromPublicDirectory, getYouTubeVideosFromTextFile } from '../utils/fileUtils';
 import { GalleryItem } from '../components/Gallery';
+import VideoGallery from '../components/VideoGallery';
 
 const VideoEditsPage: React.FC = () => {
   const [items, setItems] = useState<GalleryItem[]>([]);
@@ -13,28 +13,23 @@ const VideoEditsPage: React.FC = () => {
       try {
         setLoading(true);
         
-        // Load videos dynamically from /video-edits folder
-        const dynamicVideoEdits = await getVideosFromPublicDirectory('/video-edits');
+        // Try loading YouTube URLs from the text file first
+        const youtubeVideos = await getYouTubeVideosFromTextFile('/video-edits', 'video-edits-urls');
         
-        // Fall back to static data if no videos found
-        const galleryData = dynamicVideoEdits.length > 0 
-          ? dynamicVideoEdits 
-          : videoEditsGallery;
-        
-        // Create multiple copies of the video to test layout
-        // Only do this if we only have one video
-        let processedItems = [...galleryData];
-        if (processedItems.length === 1) {
-          const originalItem = processedItems[0];
-          // Create 2 more copies for testing the layout
-          processedItems = [
-            originalItem,
-            { ...originalItem, id: 2, title: 'Video 2' },
-            { ...originalItem, id: 3, title: 'Video 3' }
-          ];
+        // If we have YouTube videos, use those
+        if (youtubeVideos.length > 0) {
+          setItems(youtubeVideos);
+        } else {
+          // Otherwise, try loading videos from the public directory
+          const dynamicVideoEdits = await getVideosFromPublicDirectory('/video-edits');
+          
+          // Fall back to static data if no videos found
+          const galleryData = dynamicVideoEdits.length > 0 
+            ? dynamicVideoEdits 
+            : videoEditsGallery;
+          
+          setItems(galleryData);
         }
-        
-        setItems(processedItems);
       } catch (error) {
         console.error('Error loading video edits:', error);
         setItems(videoEditsGallery);
@@ -47,13 +42,11 @@ const VideoEditsPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="video-edits-gallery">
-      <CategoryPage 
-        title="Video Edits" 
-        items={items}
-        loading={loading}
-      />
-    </div>
+    <VideoGallery 
+      title="Video Edits" 
+      items={items}
+      loading={loading}
+    />
   );
 };
 

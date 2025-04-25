@@ -1,3 +1,11 @@
+html, body {
+  overflow-x: hidden; /* Control horizontal scrolling */
+  overflow-y: auto; /* Allow vertical scrolling */
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+}
+
 * {
   margin: 0;
   padding: 0;

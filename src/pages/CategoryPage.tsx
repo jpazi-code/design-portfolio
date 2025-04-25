@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Gallery from '../components/Gallery';
 import { GalleryItem } from '../components/Gallery';
 import '../styles/Gallery.css';
@@ -12,7 +11,9 @@ interface CategoryPageProps {
 
 const CategoryPage: React.FC<CategoryPageProps> = ({ title, items, loading = false }) => {
   return (
-    <Gallery items={items} title={title} loading={loading} />
+    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <Gallery items={items} title={title} loading={loading} />
+    </div>
   );
 };
 

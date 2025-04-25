@@ -1,0 +1,219 @@
+.works-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.works-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.works-header::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, #2196F3, #E64A19);
+  border-radius: 3px;
+}
+
+.works-header h1 {
+  font-size: 2.8rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.works-header p {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.works-subtitle {
+  text-align: center;
+  margin: -1rem auto 2rem;
+  max-width: 800px;
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.content-types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.content-type-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+}
+
+.content-type-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.05) 0%, rgba(230, 74, 25, 0.05) 100%);
+  transition: height 0.4s ease;
+  z-index: 0;
+}
+
+.content-type-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  border-color: transparent;
+}
+
+.content-type-card:hover::before {
+  height: 100%;
+}
+
+.content-type-card h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.content-type-card p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+.view-examples-btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  background-color: transparent;
+  border: 1px solid #333;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.view-examples-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.view-examples-btn:hover {
+  color: #fff;
+}
+
+.view-examples-btn:hover::before {
+  left: 0;
+}
+
+.custom-projects {
+  background: linear-gradient(135deg, #f8f9fa 0%, #f2f2f2 100%);
+  padding: 4rem 3rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+.custom-projects::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, #2196F3, #E64A19);
+}
+
+.custom-projects h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.custom-projects p {
+  color: #666;
+  margin-bottom: 2.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.contact-btn {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #2196F3 0%, #E64A19 100%);
+  color: #fff;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+  border: none;
+}
+
+.contact-btn:hover {
+  background: linear-gradient(135deg, #1976D2 0%, #D84315 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(33, 150, 243, 0.4);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .works-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .content-types-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .custom-projects {
+    padding: 3rem 1.5rem;
+  }
+  
+  .works-header::after {
+    bottom: -15px;
+    width: 40px;
+  }
+} 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import CategoryPage from './CategoryPage';
 import { motionEditsGallery } from '../data/galleryData';
-import { getVideosFromPublicDirectory } from '../utils/fileUtils';
+import { getVideosFromPublicDirectory, getYouTubeVideosFromTextFile } from '../utils/fileUtils';
 import { GalleryItem } from '../components/Gallery';
+import VideoGallery from '../components/VideoGallery';
 
 const MotionEditsPage: React.FC = () => {
   const [items, setItems] = useState<GalleryItem[]>([]);
@@ -13,28 +13,23 @@ const MotionEditsPage: React.FC = () => {
       try {
         setLoading(true);
         
-        // Load videos dynamically from /motion-edits folder
-        const dynamicMotionEdits = await getVideosFromPublicDirectory('/motion-edits');
+        // Try loading YouTube URLs from the text file first
+        const youtubeVideos = await getYouTubeVideosFromTextFile('/motion-edits', 'motion-edits-urls');
         
-        // Fall back to static data if no videos found
-        const galleryData = dynamicMotionEdits.length > 0 
-          ? dynamicMotionEdits 
-          : motionEditsGallery;
-        
-        // Process the items to ensure they have proper thumbnails and no unwanted titles
-        const processedItems = galleryData.map(item => {
-          // Extract just the file name without path or extension for the title
-          const simplifiedTitle = item.title.split('/').pop()?.split('.')[0] || item.title;
+        // If we have YouTube videos, use those
+        if (youtubeVideos.length > 0) {
+          setItems(youtubeVideos);
+        } else {
+          // Otherwise, try loading videos from the public directory
+          const dynamicMotionEdits = await getVideosFromPublicDirectory('/motion-edits');
           
-          // Return the processed item
-          return {
-            ...item,
-            // Use simplified title
-            title: simplifiedTitle
-          };
-        });
-        
-        setItems(processedItems);
+          // Fall back to static data if no videos found
+          const galleryData = dynamicMotionEdits.length > 0 
+            ? dynamicMotionEdits 
+            : motionEditsGallery;
+          
+          setItems(galleryData);
+        }
       } catch (error) {
         console.error('Error loading motion edits:', error);
         setItems(motionEditsGallery);
@@ -47,13 +42,11 @@ const MotionEditsPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="motion-edits-gallery">
-      <CategoryPage 
-        title="Motion Edits" 
-        items={items}
-        loading={loading}
-      />
-    </div>
+    <VideoGallery 
+      title="Motion Edits" 
+      items={items}
+      loading={loading}
+    />
   );
 };
 

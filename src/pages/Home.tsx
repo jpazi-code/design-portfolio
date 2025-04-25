@@ -27,7 +27,6 @@ const Home = () => {
     { title: 'MOTION EDITS', path: '/motion-edits', color: '#9C27B0', image: '/cardfaces/Artboard 6@2x.png' },
     { title: 'PHOTOGRAPHY', path: '/photography', color: '#388E3C', image: '/cardfaces/Artboard 7@2x.png' },
     { title: 'VIDEO EDITS', path: '/video-edits', color: '#FFC107', image: '/cardfaces/Artboard 8@2x.png' },
-    { title: 'TECH', path: '/tech', color: '#D84315', image: '/cardfaces/Artboard 9@2x.png' }
   ];
 
   // Calculate base position and rotation for cards in a fan layout
@@ -41,8 +40,8 @@ const Home = () => {
     const cardWidth = 220;
     
     // Calculate spread width based on container size - Increased for more space
-    const availableWidth = containerWidth - 150; // Account for some padding
-    const spreadWidth = Math.min(100, Math.max(70, availableWidth / totalCards));
+    const availableWidth = containerWidth - 200; // Increased padding for better spacing
+    const spreadWidth = Math.min(90, Math.max(60, availableWidth / totalCards));
     
     // Calculate the center position of the container
     const centerX = containerWidth / 2;
@@ -53,8 +52,8 @@ const Home = () => {
     // Start position (left edge of leftmost card)
     const startX = centerX - (totalSpreadWidth / 2) - (cardWidth / 2);
     
-    // Calculate spread angle - Increased for more pronounced fan effect
-    const totalAngle = 20; // Increased from 15 for more dramatic fan
+    // Calculate spread angle - Adjusted for better appearance
+    const totalAngle = 18; // Slightly reduced from 20 for less extreme fan
     const anglePerCard = totalAngle / (totalCards - 1 || 1);
     const startAngle = -totalAngle / 2;
     
@@ -67,8 +66,8 @@ const Home = () => {
     const distanceFromCenter = index - middleIndex;
     
     // Cards on the right rotate right, cards on the left rotate left
-    // Max rotation of 20 degrees for the furthest cards - increased from 15
-    const maxZRotation = 20;
+    // Reduced max rotation slightly for better visibility
+    const maxZRotation = 15; // Reduced from 20
     const rotationZ = distanceFromCenter * (maxZRotation / middleIndex);
     
     return { 
@@ -152,13 +151,13 @@ const Home = () => {
   // Calculate how much to lift card based on cursor proximity
   const getCardLift = (index: number) => {
     const distance = getDistanceToCard(index);
-    const maxDistance = 200; // Increased from 150 for wider effect range
+    const maxDistance = 180; // Reduced from 200 for more controlled effect range
     
     if (distance > maxDistance) return 0;
     
     // Simple linear relationship - closer means more lift
     const liftFactor = 1 - (distance / maxDistance);
-    return Math.floor(liftFactor * 50); // Increased from 30 for more dramatic lift
+    return Math.floor(liftFactor * 40); // Reduced from 50 for less dramatic lift
   };
 
   // Calculate horizontal shift to create isolation effect
@@ -176,7 +175,7 @@ const Home = () => {
     }
     
     // If no card is close to cursor or cursor isn't in the area, don't shift
-    if (closestCard === null || minDistance > 200) { // Increased from 150
+    if (closestCard === null || minDistance > 180) { // Reduced from 200
       return 0;
     }
     
@@ -189,17 +188,17 @@ const Home = () => {
     // Calculate distance from closest card
     const cardDistance = Math.abs(index - closestCard);
     
-    // Much more dramatic shift effect
-    const baseShift = 250; // Increased from 200 for more dramatic spread
+    // Less dramatic shift effect
+    const baseShift = 250; // Reduced from 250 for less extreme spread
     
     // Calculate proximity factor - closer means more dramatic the effect
-    const proximityFactor = Math.max(0, 1 - (minDistance / 200)); // Increased from 150
+    const proximityFactor = Math.max(0, 1 - (minDistance / 180)); // Adjusted from 200
     
-    // More aggressive shift calculation for nearby cards
-    const shift = baseShift * proximityFactor / (cardDistance * 0.3 + 0.2);
+    // More controlled shift calculation for nearby cards
+    const shift = baseShift * proximityFactor / (cardDistance * 0.4 + 0.3); // Adjusted factors
     
-    // Apply more consistent shifting
-    const minShiftPerCard = 120 * proximityFactor; // Increased from 80
+    // Apply more consistent but less extreme shifting
+    const minShiftPerCard = 100 * proximityFactor; // Reduced from 120
     const dynamicShift = Math.max(shift, minShiftPerCard * cardDistance);
     
     return direction * Math.min(dynamicShift, baseShift);

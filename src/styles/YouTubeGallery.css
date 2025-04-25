@@ -1,0 +1,113 @@
+.youtube-gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.youtube-gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.youtube-gallery-item {
+  flex: 0 0 calc(33.333% - 1.67rem);
+  max-width: 450px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+/* Fix for last row centering */
+.youtube-gallery-grid::after {
+  content: "";
+  flex: 0 0 calc(33.333% - 1.67rem);
+  max-width: 450px;
+  visibility: hidden;
+  height: 0;
+}
+
+.youtube-gallery-loading,
+.youtube-gallery-empty {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  margin-top: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.youtube-gallery-loading p,
+.youtube-gallery-empty p {
+  color: #666;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.youtube-gallery-tip {
+  font-size: 0.9rem !important;
+  color: #888 !important;
+  max-width: 400px;
+}
+
+.youtube-gallery-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(33, 150, 243, 0.3);
+  border-radius: 50%;
+  border-top-color: #2196F3;
+  animation: gallery-spin 1s ease-in-out infinite;
+}
+
+@keyframes gallery-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .youtube-gallery-grid {
+    gap: 1.5rem;
+  }
+  
+  .youtube-gallery-item {
+    flex: 0 0 calc(50% - 0.75rem);
+  }
+  
+  .youtube-gallery-grid::after {
+    flex: 0 0 calc(50% - 0.75rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .youtube-gallery-container {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .youtube-gallery-grid {
+    gap: 1.5rem;
+  }
+  
+  .youtube-gallery-container {
+    padding: 1.25rem;
+  }
+  
+  .youtube-gallery-item {
+    flex: 0 0 100%;
+  }
+  
+  .youtube-gallery-grid::after {
+    display: none;
+  }
+} 

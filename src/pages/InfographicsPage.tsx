@@ -3,6 +3,7 @@ import CategoryPage from './CategoryPage';
 import { infographicsGallery } from '../data/galleryData';
 import { getImagesFromPublicDirectory } from '../utils/fileUtils';
 import { GalleryItem } from '../components/Gallery';
+import '../styles/Gallery.css';
 
 const InfographicsPage: React.FC = () => {
   const [items, setItems] = useState<GalleryItem[]>([]);
@@ -34,7 +35,7 @@ const InfographicsPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="infographics-gallery">
+    <div className="gallery-container infographics-gallery" style={{ margin: '0 auto', maxWidth: '1400px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <CategoryPage 
         title="Infographics" 
         items={items}

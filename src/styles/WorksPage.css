@@ -24,7 +24,7 @@
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: linear-gradient(to right, #2196F3, #E64A19);
+  background: linear-gradient(to right, #5de0e6, #004aad);
   border-radius: 3px;
 }
 
@@ -77,7 +77,7 @@
   left: 0;
   width: 100%;
   height: 0;
-  background: linear-gradient(135deg, rgba(33, 150, 243, 0.05) 0%, rgba(230, 74, 25, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(93, 224, 230, 0.05) 0%, rgba(0, 74, 173, 0.05) 100%);
   transition: height 0.4s ease;
   z-index: 0;
 }
@@ -160,7 +160,7 @@
   left: 0;
   width: 100%;
   height: 5px;
-  background: linear-gradient(to right, #2196F3, #E64A19);
+  background: linear-gradient(to right, #5de0e6, #004aad);
 }
 
 .custom-projects h2 {
@@ -182,20 +182,20 @@
 .contact-btn {
   display: inline-block;
   padding: 1rem 2.5rem;
-  background: linear-gradient(135deg, #2196F3 0%, #E64A19 100%);
+  background: linear-gradient(135deg, #5de0e6 0%, #004aad 100%);
   color: #fff;
   border-radius: 30px;
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+  box-shadow: 0 5px 15px rgba(93, 224, 230, 0.3);
   border: none;
 }
 
 .contact-btn:hover {
-  background: linear-gradient(135deg, #1976D2 0%, #D84315 100%);
+  background: linear-gradient(135deg, #4bced4 0%, #003c8e 100%);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(33, 150, 243, 0.4);
+  box-shadow: 0 8px 20px rgba(93, 224, 230, 0.4);
 }
 
 /* Responsive Adjustments */

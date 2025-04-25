@@ -25,7 +25,7 @@
 }
 
 .back-link:hover {
-  color: #2196F3;
+  color: #5de0e6;
 }
 
 .page-header-title {
@@ -34,13 +34,21 @@
   font-weight: 600;
   margin-bottom: 1rem;
   text-align: center;
+  position: relative;
+}
+
+.page-header-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(to right, #5de0e6, #004aad);
+  border-radius: 2px;
+  margin: 1rem auto 0;
 }
 
 .page-header-divider {
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(to right, #2196F3, #E64A19);
-  border-radius: 2px;
+  display: none;
 }
 
 .page-header-links.single-link {

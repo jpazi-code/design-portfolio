@@ -189,7 +189,7 @@ const Home = () => {
     const cardDistance = Math.abs(index - closestCard);
     
     // Less dramatic shift effect
-    const baseShift = 250; // Reduced from 250 for less extreme spread
+    const baseShift = 200; // Reduced from 250 for less extreme spread
     
     // Calculate proximity factor - closer means more dramatic the effect
     const proximityFactor = Math.max(0, 1 - (minDistance / 180)); // Adjusted from 200

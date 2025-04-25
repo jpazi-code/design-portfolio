@@ -1,0 +1,137 @@
+import { GalleryItem } from '../components/Gallery';
+
+/**
+ * Gets all images from a public directory
+ * @param directoryPath Path to the directory (e.g., "/illustrations")
+ * @returns A Promise that resolves to an array of GalleryItem objects
+ */
+export const getImagesFromPublicDirectory = async (directoryPath: string): Promise<GalleryItem[]> => {
+  try {
+    // Using Vite's import.meta.glob to get all files from the directory
+    const imageFiles = import.meta.glob('/public/**/*.{png,jpg,jpeg,gif,webp,svg}', { eager: true });
+    
+    // Filter files that match our directory
+    const directoryPrefix = `/public${directoryPath}`;
+    
+    const filteredFiles = Object.keys(imageFiles)
+      .filter(path => path.startsWith(directoryPrefix))
+      .map((path, index) => {
+        // Extract filename from path
+        const filename = path.split('/').pop() || 'Untitled';
+        // Remove extension and convert to title case
+        const title = filename
+          .replace(/\.\w+$/, '') // Remove extension
+          .replace(/([A-Z])/g, ' $1') // Add space before capital letters
+          .replace(/^./, str => str.toUpperCase()); // Uppercase first letter
+        
+        // Create path for browser (without /public prefix)
+        const imageSrc = path.replace('/public', '') + '?url';
+        
+        return {
+          id: index + 1,
+          title,
+          imageSrc
+        };
+      });
+    
+    return filteredFiles;
+  } catch (error) {
+    console.error('Error loading images from directory:', error);
+    return [];
+  }
+};
+
+/**
+ * Gets all videos from a public directory
+ * @param directoryPath Path to the directory (e.g., "/video-edits")
+ * @returns A Promise that resolves to an array of GalleryItem objects
+ */
+export const getVideosFromPublicDirectory = async (directoryPath: string): Promise<GalleryItem[]> => {
+  try {
+    // Using Vite's import.meta.glob to get all video files from the directory
+    const videoFiles = import.meta.glob('/public/**/*.{mp4,webm,mov,avi}', { eager: true });
+    
+    // Also try to find thumbnail images in the same directory
+    const thumbnailFiles = import.meta.glob('/public/**/*.{png,jpg,jpeg,webp}', { eager: true });
+    
+    // Filter files that match our directory
+    const directoryPrefix = `/public${directoryPath}`;
+    
+    const filteredFiles = Object.keys(videoFiles)
+      .filter(path => path.startsWith(directoryPrefix))
+      .map((path, index) => {
+        // Extract filename from path
+        const filename = path.split('/').pop() || 'Untitled';
+        const filenameWithoutExt = filename.replace(/\.\w+$/, '');
+        
+        // For UI display - use a simple identifier instead of the file name
+        // to avoid showing the full file name to users
+        const displayTitle = `Video ${index + 1}`;
+        
+        // Create path for browser (without /public prefix)
+        const videoSrc = path.replace('/public', '') + '?url';
+        
+        // Look for a matching thumbnail image (same name, different extension)
+        // First check for an explicit thumbnail with -thumb suffix
+        const thumbPattern = new RegExp(`${directoryPrefix}/${filenameWithoutExt}-thumb\\.(png|jpg|jpeg|webp)$`);
+        // Then check for a file with the same name but image extension
+        const sameNamePattern = new RegExp(`${directoryPrefix}/${filenameWithoutExt}\\.(png|jpg|jpeg|webp)$`);
+        
+        // Find a thumbnail with matching patterns
+        const thumbnailPath = Object.keys(thumbnailFiles).find(
+          path => thumbPattern.test(path) || sameNamePattern.test(path)
+        );
+        
+        // Use the found thumbnail or generate a default one
+        let imageSrc = thumbnailPath 
+          ? thumbnailPath.replace('/public', '') + '?url'
+          : '/cardfaces/video-placeholder.svg?url'; // Use the SVG placeholder we created
+        
+        // Fallback to Vite logo if no placeholder exists
+        if (imageSrc === '/cardfaces/video-placeholder.svg?url') {
+          try {
+            // Try to check if the file exists (this may not work in all environments)
+            fetch(imageSrc).catch(() => {
+              imageSrc = '/vite.svg?url'; // Fallback to Vite logo
+            });
+          } catch {
+            imageSrc = '/vite.svg?url'; // Fallback to Vite logo
+          }
+        }
+        
+        return {
+          id: index + 1,
+          title: displayTitle, // Use display title instead of file name
+          imageSrc,
+          videoSrc
+        };
+      });
+    
+    // Log what was found
+    console.log('Found videos:', filteredFiles);
+    
+    // If no videos were found, return default placeholders
+    if (filteredFiles.length === 0) {
+      return [
+        {
+          id: 1,
+          title: 'Example Video',
+          imageSrc: '/cardfaces/video-placeholder.svg?url',
+          videoSrc: 'https://example.com/placeholder.mp4' // This won't actually play
+        }
+      ];
+    }
+    
+    return filteredFiles;
+  } catch (error) {
+    console.error('Error loading videos from directory:', error);
+    return [
+      {
+        id: 1,
+        title: 'Example Video',
+        imageSrc: '/cardfaces/video-placeholder.svg?url',
+        videoSrc: 'https://example.com/placeholder.mp4' // This won't actually play
+      }
+    ];
+  }
+}; 

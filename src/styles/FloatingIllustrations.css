@@ -1,0 +1,156 @@
+.floating-illustrations-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  padding: 2rem;
+  position: relative;
+  background-color: #f9f9f9;
+}
+
+.gallery-header {
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 50;
+}
+
+.back-button {
+  margin-bottom: 1rem;
+}
+
+.back-button a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1rem;
+  display: inline-block;
+  transition: color 0.3s;
+}
+
+.back-button a:hover {
+  color: #666;
+}
+
+.gallery-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 0.5rem;
+}
+
+.illustrations-arena {
+  width: 100%;
+  height: calc(100vh - 200px);
+  position: relative;
+  overflow: hidden;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-illustration {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  cursor: grab;
+  user-select: none;
+  transform-origin: center center;
+  z-index: 1;
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+  transition: filter 0.2s ease;
+}
+
+.floating-illustration:active {
+  cursor: grabbing;
+  z-index: 10;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.4));
+}
+
+.floating-illustration img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  transition: transform 0.2s ease;
+}
+
+.floating-illustration:hover img {
+  transform: scale(1.05);
+}
+
+.floating-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem;
+  transform: translateY(100%);
+  transition: transform 0.2s ease;
+}
+
+.floating-illustration:hover .floating-caption {
+  transform: translateY(0);
+}
+
+.floating-caption h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.instructions {
+  position: fixed;
+  bottom: 1rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #333;
+  font-size: 0.9rem;
+  font-weight: 500;
+  pointer-events: none;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 0.5rem;
+  backdrop-filter: blur(5px);
+}
+
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  font-size: 18px;
+  color: #666;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.no-illustrations {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  font-size: 18px;
+  color: #666;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+@media (max-width: 768px) {
+  .floating-illustrations-container {
+    padding: 1rem;
+  }
+  
+  .floating-illustration {
+    width: 150px;
+    height: 150px;
+  }
+} 

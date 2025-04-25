@@ -1,0 +1,38 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid #eaeaea;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.logo-container {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo-image {
+  max-height: 70px;
+  width: auto;
+}
+
+.navigation ul {
+  display: flex;
+  list-style: none;
+  gap: 3rem;
+}
+
+.navigation a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navigation a:hover {
+  color: #999;
+} 

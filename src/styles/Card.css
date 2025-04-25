@@ -1,0 +1,30 @@
+.card-stack-item {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transition: transform 0.4s ease, left 0.4s ease, scale 0.3s ease;
+}
+
+.card {
+  width: 220px;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.card-stack-item.active .card {
+  transform: scale(1.25);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.card:hover {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+} 

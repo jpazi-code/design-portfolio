@@ -19,15 +19,15 @@ const Home = () => {
   
   // Fixed image paths with correct URLs
   const cardData: CardData[] = [
-    { title: 'LOGOS', path: '/logos', color: '#2196F3', image: './cardfaces/Artboard 1@2x.png' },
-    { title: 'ANIMATIONS', path: '/illustrations', color: '#E64A19', image: './cardfaces/Artboard 2@2x.png' },
-    { title: 'POSTERS', path: '/posters', color: '#FBC02D', image: './cardfaces/Artboard 3@2x.png' },
-    { title: 'GRAPHICS', path: '/infographics', color: '#4CAF50', image: './cardfaces/Artboard 4@2x.png' },
-    { title: 'PUBS', path: '/publications', color: '#E91E63', image: './cardfaces/Artboard 5@2x.png' },
-    { title: 'MOTION EDITS', path: '/motion-edits', color: '#9C27B0', image: './cardfaces/Artboard 6@2x.png' },
-    { title: 'PHOTOGRAPHY', path: '/photography', color: '#388E3C', image: './cardfaces/Artboard 7@2x.png' },
-    { title: 'VIDEO EDITS', path: '/video-edits', color: '#FFC107', image: './cardfaces/Artboard 8@2x.png' },
-    { title: 'TECH', path: '/tech', color: '#D84315', image: './cardfaces/Artboard 9@2x.png' }
+    { title: 'LOGOS', path: '/logos', color: '#2196F3', image: '/cardfaces/Artboard 1@2x.png' },
+    { title: 'ANIMATIONS', path: '/illustrations', color: '#E64A19', image: '/cardfaces/Artboard 2@2x.png' },
+    { title: 'POSTERS', path: '/posters', color: '#FBC02D', image: '/cardfaces/Artboard 3@2x.png' },
+    { title: 'GRAPHICS', path: '/infographics', color: '#4CAF50', image: '/cardfaces/Artboard 4@2x.png' },
+    { title: 'PUBS', path: '/publications', color: '#E91E63', image: '/cardfaces/Artboard 5@2x.png' },
+    { title: 'MOTION EDITS', path: '/motion-edits', color: '#9C27B0', image: '/cardfaces/Artboard 6@2x.png' },
+    { title: 'PHOTOGRAPHY', path: '/photography', color: '#388E3C', image: '/cardfaces/Artboard 7@2x.png' },
+    { title: 'VIDEO EDITS', path: '/video-edits', color: '#FFC107', image: '/cardfaces/Artboard 8@2x.png' },
+    { title: 'TECH', path: '/tech', color: '#D84315', image: '/cardfaces/Artboard 9@2x.png' }
   ];
 
   // Calculate base position and rotation for cards in a fan layout

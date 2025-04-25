@@ -25,7 +25,7 @@ export const getImagesFromPublicDirectory = async (directoryPath: string): Promi
           .replace(/^./, str => str.toUpperCase()); // Uppercase first letter
         
         // Create path for browser (without /public prefix)
-        const imageSrc = path.replace('/public', '') + '?url';
+        const imageSrc = path.replace('/public', '');
         
         return {
           id: index + 1,
@@ -69,7 +69,7 @@ export const getVideosFromPublicDirectory = async (directoryPath: string): Promi
         const displayTitle = `Video ${index + 1}`;
         
         // Create path for browser (without /public prefix)
-        const videoSrc = path.replace('/public', '') + '?url';
+        const videoSrc = path.replace('/public', '');
         
         // Look for a matching thumbnail image (same name, different extension)
         // First check for an explicit thumbnail with -thumb suffix
@@ -84,18 +84,18 @@ export const getVideosFromPublicDirectory = async (directoryPath: string): Promi
         
         // Use the found thumbnail or generate a default one
         let imageSrc = thumbnailPath 
-          ? thumbnailPath.replace('/public', '') + '?url'
-          : '/cardfaces/video-placeholder.svg?url'; // Use the SVG placeholder we created
+          ? thumbnailPath.replace('/public', '')
+          : '/cardfaces/video-placeholder.svg'; // Use the SVG placeholder we created
         
         // Fallback to Vite logo if no placeholder exists
-        if (imageSrc === '/cardfaces/video-placeholder.svg?url') {
+        if (imageSrc === '/cardfaces/video-placeholder.svg') {
           try {
             // Try to check if the file exists (this may not work in all environments)
             fetch(imageSrc).catch(() => {
-              imageSrc = '/vite.svg?url'; // Fallback to Vite logo
+              imageSrc = '/vite.svg'; // Fallback to Vite logo
             });
           } catch {
-            imageSrc = '/vite.svg?url'; // Fallback to Vite logo
+            imageSrc = '/vite.svg'; // Fallback to Vite logo
           }
         }
         
@@ -116,7 +116,7 @@ export const getVideosFromPublicDirectory = async (directoryPath: string): Promi
         {
           id: 1,
           title: 'Example Video',
-          imageSrc: '/cardfaces/video-placeholder.svg?url',
+          imageSrc: '/cardfaces/video-placeholder.svg',
           videoSrc: 'https://example.com/placeholder.mp4' // This won't actually play
         }
       ];
@@ -129,7 +129,7 @@ export const getVideosFromPublicDirectory = async (directoryPath: string): Promi
       {
         id: 1,
         title: 'Example Video',
-        imageSrc: '/cardfaces/video-placeholder.svg?url',
+        imageSrc: '/cardfaces/video-placeholder.svg',
         videoSrc: 'https://example.com/placeholder.mp4' // This won't actually play
       }
     ];

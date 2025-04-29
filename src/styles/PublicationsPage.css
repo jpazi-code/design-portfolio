@@ -43,6 +43,28 @@
   color: #0074cc;
 }
 
+.view-more-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.view-more-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.view-more-button:hover {
+  background-color: #333;
+}
+
 @media (max-width: 768px) {
   .social-media-profiles {
     flex-direction: column;

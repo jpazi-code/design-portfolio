@@ -10,6 +10,7 @@ import PostersPage from './pages/PostersPage';
 import InfographicsPage from './pages/InfographicsPage';
 import PhotographyPage from './pages/PhotographyPage';
 import PublicationsPage from './pages/PublicationsPage';
+import OtherPublicationsPage from './pages/OtherPublicationsPage';
 import ProfilePage from './pages/ProfilePage';
 import PlaceholderPage from './pages/PlaceholderPage';
 import MotionEditsPage from './pages/MotionEditsPage';
@@ -36,8 +37,9 @@ function App() {
           <Route path="/motion-edits" element={<MotionEditsPage />} />
           <Route path="/video-edits" element={<VideoEditsPage />} />
           
-          {/* Social Media Publications */}
+          {/* Publications Pages */}
           <Route path="/publications" element={<PublicationsPage />} />
+          <Route path="/other-publications" element={<OtherPublicationsPage />} />
           <Route path="/publications/:slug" element={<ProfilePage />} />
           
           {/* Additional pages with placeholder components for now */}

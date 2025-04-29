@@ -144,22 +144,6 @@ const AboutPage: React.FC = () => {
               <li>Designed merch for the event</li>
             </ul>
           </div>
-
-          <div className="activity-item">
-            <div className="activity-header">
-              <h3>Volunteer for Creatives</h3>
-              <div className="activity-details">
-                <span className="organization">DLSU Innovation and Technology (DITECH) Fair 2025</span>
-                <span className="duration">December 2024 - January 2025</span>
-              </div>
-            </div>
-            <ul>
-              <li>Conceptualized the brandbook for Arigo: Bingo Tayo, a fundraising event during the vision-mission week</li>
-              <li>Created most of the social media posts for the event</li>
-              <li>Assisted in the promotional materials for the other events</li>
-            </ul>
-          </div>
-
           <div className="activity-item">
             <div className="activity-header">
               <h3>Assistant Team Leader for Creatives Committee</h3>
